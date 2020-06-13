@@ -1,4 +1,4 @@
-<hr><h1>Todos os Usuários</h1>
+<hr><h1>Todos os Usu&aacute;rio</h1>
 <pre>
     
 <?php 
@@ -13,7 +13,7 @@ echo "" . $nome . " - " . $contato . " <a href=' https://api.whatsapp.com/send?p
 
 }
 
-echo $_SERVER["REMOTE_ADDR"];
+//echo $_SERVER["REMOTE_ADDR"]; //EXIBE O IP
 ?>
 
 </pre>
