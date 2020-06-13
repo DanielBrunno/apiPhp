@@ -4,12 +4,12 @@
 <?php 
 //print_r($data); //exibe um array com todos os registros não ativar, só para teste
 $msn = "Oi. Teste de Mensagem da API Contatos";
-echo "Nome: ";
+echo "Nome: <br><br> ";
 
 for($i = 0; $i < count($data); $i++){
 $nome = $data[$i]["nome"];    
 $contato = $data[$i]["contato"];    
-echo "" . $nome . " - " . $contato . " <a href=' https://api.whatsapp.com/send?phone=" . $nome. "&text=" . $msn. " '><button>Enviar Whatssap</button></a> ";
+echo "" . $nome . " - " . $contato . " <a style='text-align:left;' href=' https://api.whatsapp.com/send?phone=+55" . $nome. "&text=" . $msn. " '><button style='background: #00FF00; color: #FFFFFF; font-size: 14pt; border-radius: 5px; border-bottom-color: #FFFFFF;'>Enviar Whatssap</button></a> <br><br> ";
 
 }
 

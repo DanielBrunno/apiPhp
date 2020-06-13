@@ -1,63 +1,47 @@
-<hr><h1>Deletarf Usuário</h1>
-
-<div class="row">
-    <div style="text-align: center" class="col-md-1">
+<br>
+<h1>Apagar Usu&aacute;rio</h1>
+ <div style="text-align: center" class="col-md-1">
     </div>
-    <div class="col-md-7">
+    <div class="col-md-2">
         <form role="form" action="index.php?modulo=Usuario&acao=deleteId" method="POST">
             <div class="form-group">              
-                <label for="exampleInputEmail1">
-                    ID
-                </label>
-                <input style="width:100%;" type="text" name="id" class="form-control" id="exampleInputPassword1" pattern="[0-9][0-9][0-9]+.[0-9][0-9][0-9]+.[0-9][0-9][0-9]+-[0-9][0-9]{3,3,3,2}$" title="Digite o cpf" placeholder="999.999.999-99"><br />
                 <input type="hidden" name="tipost" value="Buscar"><br />
+                <input style="width:100%;" type="text" name="id" title="Digite o id" placeholder="Digite o ID do contato">
             </div>
             <div class="form-group">
-                <input type="submit" value="Buscar" /><br />
+                <input type="submit" value="Selecionar" /><br />
             </div>
         </form>
     </div>
-    <div style="text-align: center" class="col-md-4">
-        <img style="width: 50%;" alt="Bootstrap Image Preview" src="view/resources/images/logo_gitLab.jpg">
-    </div>
-</div>
-
 <pre>
-    
-<? 
+      
+<?php
 
-if (isset($_POST["id"])) {
-
-
-for($i = 0; $i < count($data); $i++){  
-
-?>
-            <form action="index.php?modulo=Usuario&acao=deleteId" method="POST">
-                
-                Id: <? echo $data[$i]["id"]; ?> - <? echo $data[$i]["nome"]; ?> <? echo $data[$i]["sobrenome"]; ?> - Cpf: <? echo $data[$i]["cpf"]; ?> - Contato: <? echo $data[$i]["contato"]; ?>.
-                <input type="hidden" name="id" value="<? echo $data[$i]["id"]; ?>"  readonly />
-                <input type="hidden" name="nome" value="<? echo $data[$i]["nome"]; ?>" />
-                <input type="hidden" name="tipost" value="Deletar">
-                <input type="hidden" name="sobrenome" value="<? echo $data[$i]["sobrenome"]; ?>" />
-                <input type="hidden" name="contato" pattern="(+[0-9][0-9]+)+ [0-9][0-9][0-9][0-9][0-9]+-[0-9][0-9][0-9][0-9]{2,5,4}$"  placeholder="(99) 99999-9999" value="<? echo $data[$i]["contato"]; ?>" />
-                <input type="hidden" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="nome@nome.com ou nome@nome.com.br" value="<? echo $data[$i]["email"]; ?>" />
-
-                Confirma: <input type="checkbox" name="status" required />
-                <input type="submit" value="Deletar" />
-
-        </form>
-
-
-<?
-
-}
-} else {  echo "Realize sua consulta!";  }
+ if(isset($data) && $_POST["tipost"] == "Buscar"){
+    echo "<div class='col-md-6'>
+            <form role='form' action='index.php?modulo=Usuario&acao=deleteId' method='POST'>
+            <div style='text-align: center' class='col-md-1'></div>     
+                <div class='form-group'> ";
+    for($i = 0; $i < count($data); $i++){  
+        echo "<input type='hidden' name='tipost' value='Deletar'  readonly/>
+              Id: <input type='text' name='id' class='form-control' value='". $data[$i]['id'] . "'  readonly required />
+              Nome: <input type='text' name='nome' class='form-control' value='". $data[$i]['nome'] . "' required />
+              Contato: <input type='text' name='contato' class='form-control' value='". $data[$i]['contato'] . "' required />
+              E-mail: <input type='text' name='email' class='form-control' value='". $data[$i]['email'] . "' required />
+              Senha: <input type='password' name='senha' class='form-control' value='' required />
+              <label> Confirmar: <input type='checkbox' name='status' required /> </label>
+              <input type='submit' style='background: #00FF00; color: #FFFFFF; font-size: 14pt; border-radius: 5px; border-bottom-color: #FFFFFF; width: 75%; height: 50px;' value='APAGAR' />
+             ";
+     }
+     echo "</form>
+     </div>";
+     
+     } else if(isset($data) && $_POST["tipost"] == "Deletar"){
+        if(isset($_POST["nome"])) echo "<h4>  Tudo ok. Deseja apagar outro contato? </h4> ";
+    } else {  
+        if(isset($_POST['tipost']) && $data == null && $_POST["tipost"] == "Buscar") echo "Não Contato com o Id = " . $_POST['id'] . "<br>";
+        echo "Realize sua consulta!";  
+    }
 
 ?> 
-
 </pre>
-
-
-
-
-

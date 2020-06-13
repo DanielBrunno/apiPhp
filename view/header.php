@@ -46,11 +46,11 @@
                   </form>
                 <li><hr></li> -->   
               <li><a href="#band">USU&Aacute;RIO</a></li>                    
+              <li><a href="./index.php?modulo=Usuario&acao=push"><i class="icon-user"></i> Cadastrar </a></li>
               <li><a href="./index.php?modulo=Usuario&acao=findAll"><i class="icon-user"></i> Mostrar Todos </a></li>
               <li><a href="./index.php?modulo=Usuario&acao=findId"><i class="icon-user"></i> Mostrar por Id </a></li>
-              <!-- <li><a href="./index.php?modulo=Usuario&acao=findpush"><i class="icon-user"></i> Inserir </a></li>
-              <li><a href="./index.php?modulo=Usuario&acao=findpush"><i class="icon-user"></i> Editar </a></li>
-              <li><a href="./index.php?modulo=Usuario&acao=findpush"><i class="icon-user"></i> Deletar </a></li> -->
+              <li><a href="./index.php?modulo=Usuario&acao=update"><i class="icon-user"></i> Editar </a></li>
+              <li><a href="./index.php?modulo=Usuario&acao=deleteId"><i class="icon-user"></i> Deletar </a></li>            
               </li>
               <li><hr></li>          
           </ul>

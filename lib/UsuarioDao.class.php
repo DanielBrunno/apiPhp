@@ -29,14 +29,14 @@ class UsuarioDao {
             $email = $_POST['email'];
             $senha = sha1($_POST['senha']);
             if ($senha) {                
-                $execute = "INSERT INTO usuario (nome , contato, email, senha)"
+                $execute = "INSERT INTO usuarios (nome , contato, email, senha)"
                         . " VALUES ('$nome', '$contato', '$email', '$senha') ";
                 $link = mysqli_query($this->conexao->getCon(), $execute);
-                echo  "<script>alert('Registro Gravado com Sucesso!');</script>";
             } else { echo "NAO GRAVADO NO BANCO <br>"; }
-                
-            header('location: http://www.localhost/cadastro/index.php?modulo=Usuario&acao=push');                
+            echo  "<script>alert('Registro Gravado com Sucesso!');</script>";                
             $postData = array($nome, $contato, $email);
+           //if($postData != null) header('location: http://www.localhost/cadastro/index.php?modulo=Usuario&acao=push');                
+
 
         } else { $postData = array("nenhum POST foi enviado"); }
     return $postData;
@@ -45,33 +45,33 @@ class UsuarioDao {
 //ALTERAR REGISTRO
     public function update() { 
         
-        if(isset($_POST['cpf']) && ($_POST['tipost'] == "Buscar")){
+        if(isset($_POST['id']) && ($_POST['tipost'] == "Buscar")){
         
-        $cpf = $_POST['cpf'];
-        $sql = 'SELECT * FROM usuario WHERE cpf = "'.$cpf.'" '; 
-        $result = mysqli_query($this->conexao->getCon(), $sql);
-        $rowcount = mysqli_num_rows($result);
-        $usuarios = array($rowcount);
-        if ($rowcount > 0) {
-            $postData = array();
-            while ($row = $result->fetch_assoc()) { 
-            $postData[] = $row; // transformo os dados em objetos e copio para o array
+            $id = $_POST['id'];
+            $sql = 'SELECT id, nome, contato, email FROM usuarios WHERE id = "'.$id.'" '; 
+            $result = mysqli_query($this->conexao->getCon(), $sql);
+            $rowcount = mysqli_num_rows($result);
+            $usuarios = array($rowcount);
+
+            if ($rowcount > 0) {                
+                $postData = array();            
+                while ($row = $result->fetch_assoc()) { 
+                    $postData[] = $row; // transformo os dados em objetos e copio para o array        
             }
-        }
-            
-        return $postData; //retorno os dados em array
+            return $postData; //retorno os dados em array
+            }
         
-        } elseif (isset($_POST["id"]) && ($_POST['tipost'] == "Editar")){
-            
+        } else if(isset($_POST["id"]) && $_POST['tipost'] == "Editar"){         
             $id = $_POST['id'];
             $nome = $_POST['nome'];
             $contato = $_POST['contato'];
             $email = $_POST['email'];
             $senha = sha1($_POST['senha']);
 
-            $query = "UPDATE usuario SET nome='$nome', contato='$contato', email='$email' WHERE id='$id'";
+            $query = "UPDATE usuarios SET nome='$nome', contato='$contato', email='$email' WHERE id='$id'";
             $link = mysqli_query($this->conexao->getCon(), $query);        
-        
+            echo  "<script>alert('Registro Editado com Sucesso!');</script>";                
+            $postData = array($nome, $contato, $email);        
             return $postData; //retorno os dados em array
         
         } else { return null; }
@@ -82,26 +82,30 @@ class UsuarioDao {
     public function deleteId(){
         
         if(isset($_POST['id']) && ($_POST['tipost'] == "Buscar")){
+        
             $id = $_POST['id'];
-            $sql = 'SELECT * FROM usuario WHERE id = "'.$id.'" '; 
+            $sql = 'SELECT id, nome, contato, email FROM usuarios WHERE id = "'.$id.'" '; 
             $result = mysqli_query($this->conexao->getCon(), $sql);
             $rowcount = mysqli_num_rows($result);
             $usuarios = array($rowcount);
 
-            if ($rowcount > 0) {
-                $postData = array();
+            if ($rowcount > 0) {                
+                $postData = array();            
                 while ($row = $result->fetch_assoc()) { 
-                $postData[] = $row; // transformo os dados em objetos e copio para o array
-                }
+                    $postData[] = $row; // transformo os dados em objetos e copio para o array        
             }
             return $postData; //retorno os dados em array
+            }
         
-            } elseif (isset($_POST["id"]) && ($_POST['tipost'] == "Deletar")){            
+        } else if(isset($_POST["id"]) && $_POST['tipost'] == "Deletar"){              
                 $id = $_POST['id'];
-                $deleteq = 'DELETE FROM usuario WHERE id = "'.$id.'" '; 
+                $deleteq = 'DELETE FROM usuarios WHERE id = "'.$id.'" '; 
                 $link = mysqli_query($this->conexao->getCon(), $deleteq);
-            return true; //retorno os dados em array        
-            } else { return false; }        
+            echo  "<script>alert('Registro APAGADO com Sucesso!');</script>";                
+            $postData = array($nome = NULL, $contato = NULL, $email = NULL);        
+            return $postData; //retorno os dados em array
+        
+        } else { return null; } 
     }
     
 //MOSTRAR TODOS 
