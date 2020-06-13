@@ -15,22 +15,13 @@ class Conexao {
     private $banco = "danie932_atividades";
     private $con;
     */
-    
-    private $usuario = "root";
-    private $senha = "";
-    private $caminho = "localhost";	
-    //private $caminho = "127.0.0.1";
-    private $banco = "cadastro";
-    private $con;
 
-    /*
     private $usuario = "valter";
     private $senha = "@AtivInfor1";
-    private $caminho = "localhost";	
-    //private $caminho = "127.0.0.1";
+    //private $caminho = "localhost";	
+    private $caminho = "127.0.0.1";
     private $banco = "cadastro";
     private $con;
-     */
     
     public function __construct() {
         $this->con = mysqli_connect($this->caminho, $this->usuario, $this->senha) or die ("Conexao com o banco de dados falhou" . mysqli_error($this->con));
