@@ -12,6 +12,8 @@ $contato = $data[$i]["contato"];
 echo "" . $nome . " - " . $contato . " <a href=' https://api.whatsapp.com/send?phone=" . $nome. "&text=" . $msn. " '><button>Enviar Whatssap</button></a> ";
 
 }
-?> 
+
+echo $_SERVER["REMOTE_ADDR"];
+?>
 
 </pre>
