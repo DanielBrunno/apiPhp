@@ -10,7 +10,8 @@ class Conexao {
 	  
     private $usuario = "valter";
     private $senha = "@AtivInfor1";
-    private $caminho = "localhost";	
+    //private $caminho = "localhost";	
+    private $caminho = "127.0.0.1";
     private $banco = "cadastro";
     private $con;
     
