@@ -1,4 +1,4 @@
-<hr><h1>Todos os Usu&aacute;rio</h1>
+<hr><h1>Todos os Usu&aacute;rios</h1>
 <pre>
     
 <?php 
