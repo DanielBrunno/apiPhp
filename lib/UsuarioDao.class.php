@@ -12,9 +12,14 @@ class UsuarioDao {
 
     public function __construct() {
         $this->conexao = new Conexao();
-    }  
+    }
+    
+ /****************************************************************************************************************************************************************************
+                                                                                FUNÇÕES DE RETORNO ARRAY           
+  ****************************************************************************************************************************************************************************/
+        
 
-    //INSERIR REGISTRO
+//INSERIR REGISTRO
     public function push() { // FUNÇÃO FINAL - COMPLETA
 
         if (isset($_POST) && count($_POST) >= 1) {
@@ -23,28 +28,21 @@ class UsuarioDao {
             $contato = $_POST['contato'];
             $email = $_POST['email'];
             $senha = sha1($_POST['senha']);
-
-            if ($senha) {
-                
+            if ($senha) {                
                 $execute = "INSERT INTO usuario (nome , contato, email, senha)"
                         . " VALUES ('$nome', '$contato', '$email', '$senha') ";
                 $link = mysqli_query($this->conexao->getCon(), $execute);
                 echo  "<script>alert('Registro Gravado com Sucesso!');</script>";
-                } else {
-                echo "NAO GRAVADO NO BANCO <br>";
-                }
+            } else { echo "NAO GRAVADO NO BANCO <br>"; }
                 
-                header('location: http://www.localhost/cadastro/index.php?modulo=Usuario&acao=push');
-                
+            header('location: http://www.localhost/cadastro/index.php?modulo=Usuario&acao=push');                
             $postData = array($nome, $contato, $email);
 
-        } else {
-            $postData = array("nenhum POST foi enviado");
-        }
-        return $postData;
+        } else { $postData = array("nenhum POST foi enviado"); }
+    return $postData;
     } 
     
-    //ALTERAR REGISTRO
+//ALTERAR REGISTRO
     public function update() { 
         
         if(isset($_POST['cpf']) && ($_POST['tipost'] == "Buscar")){
@@ -54,18 +52,16 @@ class UsuarioDao {
         $result = mysqli_query($this->conexao->getCon(), $sql);
         $rowcount = mysqli_num_rows($result);
         $usuarios = array($rowcount);
-
-            if ($rowcount > 0) {
-                $postData = array();
-                while ($row = $result->fetch_assoc()) { 
-                $postData[] = $row; // transformo os dados em objetos e copio para o array
-                }
+        if ($rowcount > 0) {
+            $postData = array();
+            while ($row = $result->fetch_assoc()) { 
+            $postData[] = $row; // transformo os dados em objetos e copio para o array
             }
+        }
             
         return $postData; //retorno os dados em array
-        }
         
-        elseif (isset($_POST["id"]) && ($_POST['tipost'] == "Editar")){
+        } elseif (isset($_POST["id"]) && ($_POST['tipost'] == "Editar")){
             
             $id = $_POST['id'];
             $nome = $_POST['nome'];
@@ -74,30 +70,23 @@ class UsuarioDao {
             $senha = sha1($_POST['senha']);
 
             $query = "UPDATE usuario SET nome='$nome', contato='$contato', email='$email' WHERE id='$id'";
-
-        $link = mysqli_query($this->conexao->getCon(), $query);
+            $link = mysqli_query($this->conexao->getCon(), $query);        
         
-        return $postData; //retorno os dados em array
+            return $postData; //retorno os dados em array
         
-        } 
-        
-        else { 
-        
-            return null;
-        }
+        } else { return null; }
             
     }
     
-    //DELETAR POR ID
+//DELETAR POR ID
     public function deleteId(){
         
-       if(isset($_POST['id']) && ($_POST['tipost'] == "Buscar")){
-        
-        $id = $_POST['id'];
-        $sql = 'SELECT * FROM usuario WHERE id = "'.$id.'" '; 
-        $result = mysqli_query($this->conexao->getCon(), $sql);
-        $rowcount = mysqli_num_rows($result);
-        $usuarios = array($rowcount);
+        if(isset($_POST['id']) && ($_POST['tipost'] == "Buscar")){
+            $id = $_POST['id'];
+            $sql = 'SELECT * FROM usuario WHERE id = "'.$id.'" '; 
+            $result = mysqli_query($this->conexao->getCon(), $sql);
+            $rowcount = mysqli_num_rows($result);
+            $usuarios = array($rowcount);
 
             if ($rowcount > 0) {
                 $postData = array();
@@ -105,141 +94,71 @@ class UsuarioDao {
                 $postData[] = $row; // transformo os dados em objetos e copio para o array
                 }
             }
-            
-        return $postData; //retorno os dados em array
-        }
+            return $postData; //retorno os dados em array
         
-        elseif (isset($_POST["id"]) && ($_POST['tipost'] == "Deletar")){
-            
-        $id = $_POST['id'];
-        $deleteq = 'DELETE FROM usuario WHERE id = "'.$id.'" '; 
-        $link = mysqli_query($this->conexao->getCon(), $deleteq);
-        
-        return true; //retorno os dados em array
-        
-        } 
-        
-        else { 
-        
-            return false;
-        }        
+            } elseif (isset($_POST["id"]) && ($_POST['tipost'] == "Deletar")){            
+                $id = $_POST['id'];
+                $deleteq = 'DELETE FROM usuario WHERE id = "'.$id.'" '; 
+                $link = mysqli_query($this->conexao->getCon(), $deleteq);
+            return true; //retorno os dados em array        
+            } else { return false; }        
     }
     
-    /****************************************************************************************************************************************************************************
-                                                                                FUNÇÕES DE RETORNO ARRAY           
-    ****************************************************************************************************************************************************************************/
-    
-    //MOSTRAR TODOS 
+//MOSTRAR TODOS 
     public function findAll() { // FUNÇÃO COMPLETA E VERIFICADA
 
-        //$id = 2;
-        $id = $_POST['id'];
-        $sql = "SELECT usuario.id, usuario.nome, usuario.contato, usuario.email FROM usuario usuario.id ={$id}";
-        
+        $sql = "SELECT id, nome, contato, email FROM usuarios";
         $result = mysqli_query($this->conexao->getCon(), $sql);
         $rowcount = mysqli_num_rows($result);
         $usuarios = array($rowcount);
 
-        if ($rowcount > 0) {
-                
-        $postData = array();
-            
-        while ($row = $result->fetch_assoc()) { 
-                
-        $postData[] = $row; // transformo os dados em objetos e copio para o array
-        
-        }
-        
+        if ($rowcount > 0) {                
+            $postData = array();            
+            while ($row = $result->fetch_assoc()) { 
+            $postData[] = $row; // transformo os dados em objetos e copio para o array
+        }        
         return $postData; //retorno os dados em array
             
-        } else {
-    
-        return $postData = null;
-
-        }
+        } else { return $postData = null; }
 
     }
     
-    //MOSTRAR TODOS 
-    public function findAllComp() { // FUNÇÃO COMPLETA E VERIFICADA
-        $sql = "SELECT * FROM usuario"; 
-        $result = mysqli_query($this->conexao->getCon(), $sql);
-        $rowcount = mysqli_num_rows($result);
-        $usuarios = array($rowcount);
-
-        if ($rowcount > 0) {
-                
-        $postData = array();
-            
-        while ($row = $result->fetch_assoc()) { 
-                
-        $postData[] = $row; // transformo os dados em objetos e copio para o array
         
-        }
-        
-        return $postData; //retorno os dados em array
-            
-        } else {
-    
-        return $postData = NULL;
-
-        }
-
-    }
-        
-    //MOSTRAR POR ID
+//MOSTRAR POR ID
     public function findId() { // FUNÇÃO COMPLETA E VERIFICADA
+        if(isset($_POST["id"])){
+            $id = $_POST['id'];
+            $sql = 'SELECT id, nome, contato, email FROM usuarios WHERE id = "'.$id.'" '; 
+            $result = mysqli_query($this->conexao->getCon(), $sql);
+            $rowcount = mysqli_num_rows($result);
+            $usuarios = array($rowcount);
 
-        $id = $_POST['id'];
-        $sql = 'SELECT * FROM usuario WHERE id = "'.$id.'" '; 
-        $result = mysqli_query($this->conexao->getCon(), $sql);
-        $rowcount = mysqli_num_rows($result);
-        $usuarios = array($rowcount);
-
-        if ($rowcount > 0) {
-                
-        $postData = array();
-            
-        while ($row = $result->fetch_assoc()) { 
-                
-        $postData[] = $row; // transformo os dados em objetos e copio para o array
+            if ($rowcount > 0) {                
+                $postData = array();            
+                while ($row = $result->fetch_assoc()) { 
+                    $postData[] = $row; // transformo os dados em objetos e copio para o array        
+            }
+            return $postData; //retorno os dados em array
+            }
         
-        }
-        
-        return $postData; //retorno os dados em array
+        } else { return $postData = NULL;  }  
             
-        } else {
-    
-        return $postData = "Não há dados com este Id!";
-
-        }  
-
     }
-        //MOSTRAR POR LOGIN COM RETORNO TODOS CAMPOS
+    
+//MOSTRAR POR LOGIN COM RETORNO TODOS CAMPOS
     public function findLogin($email,$senha) { // FUNÇÃO COMPLETA E VERIFICADA
-        //$login = "nutricionista";
-		//$senha = "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c";		
-		//$senha = "0";		
         $sql = "SELECT * FROM usuario WHERE email = '".$email."' AND senha = '" .sha1($senha). "' "; 
         $result = mysqli_query($this->conexao->getCon(), $sql);
         $rowcount = mysqli_num_rows($result);
         $usuarios = array($rowcount);
 
-        if ($rowcount > 0) {
-                
-            $postData = array();
-            
-        while ($row = $result->fetch_assoc()) { 
-                
-            $postData[] = $row; // transformo os dados em objetos e copio para o array
+        if ($rowcount > 0) {                
+            $postData = array();            
+            while ($row = $result->fetch_assoc()) { 
+                $postData[] = $row; // transformo os dados em objetos e copio para o array
         }
-
-        return $postData; //retorno os dados em array
-            
-        }
-        
-        return $postData = NULL;
-           
+        return $postData; //retorno os dados em array            
+        } else { return $postData = NULL; }           
     }
     
 }

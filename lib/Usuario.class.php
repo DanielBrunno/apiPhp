@@ -75,8 +75,8 @@ class Usuario extends Model{
         
    // FUNÇÃO REFERENTE A VIEW -  findId 
     public function findId() { // FUNÇÃO FINAL - COMPLETA
-        $uId = new UsuarioDao();
-        return $uId->findId();
+        $data = new UsuarioDao();
+        return $data->findId();
     }
 
     public function push(){

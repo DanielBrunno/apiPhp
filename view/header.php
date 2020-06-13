@@ -37,40 +37,26 @@
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><hr></li>
-              <li><a href="#band">LOGIN</a></li>
+            <!--  <li><a href="#band">LOGIN</a></li>
                   <form method="POST" action="index.php?modulo=#&acao=#">
                       <input type="text" name="login" placeholder="Digite o Usu&aacute;rio" required> 
                       <input type="password" name="senha" placeholder="Senha" required>
                       <br>
                       <li><input type="submit" name="Entrar" value="ENTRAR" /> </li>
-                  </form>                      
-
-
-<script type="text/javascript">  
-           
-            function close(){  
-		//window.open("http://www.finesaude.com.br/index.php");
-		//window.close();            
-           // window.location="http://www.finesaude.com.br/index.php?modulo=Usuario&acao=novo";
-                     window.location="http://google.com.br";
-           // window.open("http://google.com.br"); 
-  
-            }  
-</script>
-
+                  </form>
+                <li><hr></li> -->   
+              <li><a href="#band">USU&Aacute;RIO</a></li>                    
+              <li><a href="./index.php?modulo=Usuario&acao=findAll"><i class="icon-user"></i> Mostrar Todos </a></li>
+              <li><a href="./index.php?modulo=Usuario&acao=findId"><i class="icon-user"></i> Mostrar por Id </a></li>
+              <!-- <li><a href="./index.php?modulo=Usuario&acao=findpush"><i class="icon-user"></i> Inserir </a></li>
+              <li><a href="./index.php?modulo=Usuario&acao=findpush"><i class="icon-user"></i> Editar </a></li>
+              <li><a href="./index.php?modulo=Usuario&acao=findpush"><i class="icon-user"></i> Deletar </a></li> -->
               </li>
-              <li><hr></li>
-              
-
-
-           
+              <li><hr></li>          
           </ul>
         </li>        
       </ul>
     </div>
   </div>
 </nav>
-<?php
-//echo implode("|",$dataheader);
-?>
 <hr />

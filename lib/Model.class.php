@@ -1,6 +1,2 @@
 <?php
-abstract class Model{
-	use MenuHeader;
-	use MenuFooter;	
-	
-}
+abstract class Model{ }
