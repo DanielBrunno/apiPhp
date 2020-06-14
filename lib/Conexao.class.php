@@ -17,18 +17,13 @@ class Conexao {
     */
 
 // BANCO RODANDO LOCALHOST NO XAMPP
-    /*private $usuario = "valter";
+    private $usuario = "valter2";
     private $senha = "@AtivInfor1";
     private $caminho = "127.0.0.1";
     private $banco = "cadastro";
-    private $con;*/
-
-    // BANCO RODANDO LOCALHOST NO XAMPP
-    private $usuario = "root";
-    private $senha = "";
-    private $caminho = "127.0.0.1";
-    private $banco = "cadastro";
     private $con;
+
+
     
     public function __construct() {
         $this->con = mysqli_connect($this->caminho, $this->usuario, $this->senha) or die ("Conexao com o banco de dados falhou" . mysqli_error($this->con));
