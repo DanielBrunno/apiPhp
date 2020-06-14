@@ -19,7 +19,7 @@ class Conexao {
 // BANCO RODANDO LOCALHOST NO XAMPP
     private $usuario = "valter2";
     private $senha = "@AtivInfor1";
-    private $caminho = "127.0.0.1";
+    private $caminho = "192.168.0.19";
     private $banco = "cadastro";
     private $con;
 
