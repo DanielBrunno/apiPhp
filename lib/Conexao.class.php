@@ -9,22 +9,20 @@ class Conexao {
     //put your code here 
     
     // BANCO RODANDO ON LINE
-    /* private $usuario = "consumo_valter";    
+    private $usuario = "consumo_valter";    
     private $senha = "@Ativ123";
     private $caminho = "clubedeconsumidores.com.br";
     private $banco = "consumo_atividades";
     private $con;
-    */
+    
 
 // BANCO RODANDO LOCALHOST NO XAMPP
-    private $usuario = "valter2";
+/*    private $usuario = "valter2";
     private $senha = "@AtivInfor1";
-    //private $caminho = "192.168.0.19";
-    //private $caminho = "192.168.0.19:3306";
     private $caminho = "192.168.56.1:3306";
     private $banco = "cadastro";
     private $con;
-
+*/
 
     
     public function __construct() {
